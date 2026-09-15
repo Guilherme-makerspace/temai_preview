@@ -1,5 +1,5 @@
 const sequelize = require('./database/dbconfig');
-const User = require('./schemas/UserScehma');
+const User = require('./schemas/UserSchema');
 const server = require('./server');
 
 async function run() {
