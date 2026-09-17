@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-inscrição - TemAí</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        :root {
+            --primary-red: #c83c2b;
+            --bg-canvas: #f9f8f6;
+            --card-bg: #f8f6f2;
+            --text-dark: #111111;
+            --text-muted: #666666;
+            --border-color: #e8e3dc;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background-color: var(--bg-canvas);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .card-inscricao {
+            border: none;
+            border-radius: 32px;
+            background-color: var(--card-bg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            max-width: 580px;
+        }
+
+        .titulo-inscricao {
+            font-weight: 800;
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            line-height: 1.2;
+            color: var(--text-dark);
+            letter-spacing: -0.03em;
+        }
+
+        .destaque {
+            color: var(--primary-red);
+        }
+
+        .subtitulo-inscricao {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .form-label-temai {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            margin-bottom: 0.35rem;
+        }
+
+        .input-grupo {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .input-grupo:focus-within {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 4px rgba(200, 60, 43, 0.12);
+        }
+
+        .icone-campo {
+            background: transparent;
+            border: none;
+            color: #a1a1a1;
+            padding-left: 1rem;
+            padding-right: 0.5rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .input-temai {
+            border: none !important;
+            background: transparent !important;
+            padding: 0.85rem 1rem 0.85rem 0.25rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+            box-shadow: none !important;
+        }
+
+        .btn-temai {
+            font-weight: 700;
+            border-radius: 16px;
+            padding: 0.95rem 1.8rem;
+            background: var(--primary-red);
+            border: none;
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(200, 60, 43, 0.25);
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .btn-temai:hover:not(:disabled) {
+            background: #b03222;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(200, 60, 43, 0.35);
+        }
+
+        .btn-temai:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .rodape-info {
+            font-size: 0.78rem;
+            color: #777777;
+            font-weight: 500;
+        }
+
+        .erro-campo {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            min-height: 1.2em;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        footer {
+            background: transparent;
+            color: #888888;
+            font-size: 0.82rem;
+            border-top: 1px solid #eae5de;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-red);
+            border-color: var(--primary-red);
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="flex-grow-1 d-flex align-items-center justify-content-center py-5 px-3">
+        <div class="card card-inscricao w-100">
+            <div class="card-body p-4 p-md-5">
+
+                <h1 class="titulo-inscricao text-center mb-3">
+                    Seja um dos primeiros a testar o <span class="destaque">TemAí!</span>
+                    <span class="destaque">Por apenas R$15,90</span>
+                </h1>
+
+                <p class="subtitulo-inscricao text-center mb-4">
+                    Entre para a lista de espera e receba <span class="destaque">3 receitas gratuitas</span>
+                    de receitas. Fique por dentro do lançamento oficial.
+                </p>
+
+                <form id="form-prelinscricao" novalidate>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label form-label-temai">Seu nome completo</label>
+                        <div class="input-group input-grupo">
+                            <span class="icone-campo"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control input-temai" id="name" name="name"
+                                placeholder="Ex: Mariana Silva">
+                        </div>
+                        <span class="erro-campo" data-erro="name"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label form-label-temai">Seu melhor e-mail</label>
+                        <div class="input-group input-grupo">
+                            <span class="icone-campo"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control input-temai" id="email" name="email"
+                                placeholder="mariana@email.com">
+                        </div>
+                        <span class="erro-campo" data-erro="email"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label form-label-temai">Email</label>
+                        <div class="input-group input-grupo">
+                            <span class="icone-campo"><i class="bi bi-telephone"></i></span>
+                            <input type="tel" class="form-control input-temai" id="phone" name="phone"
+                                placeholder="(11) 99999-9999">
+                        </div>
+                        <span class="erro-campo" data-erro="phone"></span>
+                    </div>
+
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="acceptsNotifications"
+                            name="acceptsNotifications">
+                        <label class="form-check-label subtitulo-inscricao" for="acceptsNotifications">
+                            Aceito receber notificações sobre o lançamento e novidades.
+                        </label>
+                    </div>
+                    <span class="erro-campo" data-erro="acceptsNotifications"></span>
+
+                    <button type="submit" class="btn btn-temai w-100 mt-3" id="btn-enviar">
+                        Quero entrar na lista de espera &rarr;
+                    </button>
+                </form>
+
+                <div class="d-flex justify-content-between align-items-center mt-4 pt-2 rodape-info">
+                    <span><i class="bi bi-fire text-warning me-1"></i> Mais de <strong>1.480 cozinheiros</strong> já garantiram vaga</span>
+                    <span><i class="bi bi-shield-check text-success me-1"></i> Sem spam. Seus dados estão protegidos.</span>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- confirmação -->
+    <div class="modal fade" id="modal-sucesso" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0" style="border-radius:24px;">
+                <div class="modal-body text-center p-5">
+                    <div class="mb-3" style="font-size:2.5rem;">✅</div>
+                    <h2 class="titulo-inscricao mb-2" style="font-size:1.3rem;">Pré-inscrição confirmada!</h2>
+                    <p class="subtitulo-inscricao mb-4">
+                        Obrigado por se interessar pelo TemAí. Em breve entraremos em contato com as novidades.
+                    </p>
+                    <button type="button" class="btn btn-temai w-100" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+            <span>&copy; 2026 TemAí Tecnologia. Todos os direitos reservados.</span>
+    
+        </div>
+    </footer>
+
+    <!-- bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // validação de campos obrigatórios e formatos no cliente 
+        const form = document.getElementById('form-prelinscricao');
+        const botao = document.getElementById('btn-enviar');
+        const modal = new bootstrap.Modal(document.getElementById('modal-sucesso'));
+
+        const campoTexto = /^[A-Za-zÀ-ÿ' ]{3,}$/;
+        const campoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const campoTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+
+        function definirErro(campo, mensagem) {
+            const alvo = document.querySelector('[data-erro="' + campo + '"]');
+            alvo.textContent = mensagem || '';
+            return !mensagem;
+        }
+
+        function validarNome() {
+            const valor = document.getElementById('name').value.trim();
+            if (!valor) return definirErro('name', 'Informe seu nome completo.');
+            if (!campoTexto.test(valor)) return definirErro('name', 'Nome inválido.');
+            return definirErro('name', '');
+        }
+
+        function validarEmail() {
+            const valor = document.getElementById('email').value.trim();
+            if (!valor) return definirErro('email', 'Informe seu e-mail.');
+            if (!campoEmail.test(valor)) return definirErro('email', 'E-mail inválido.');
+            return definirErro('email', '');
+        }
+
+        function validarTelefone() {
+            const valor = document.getElementById('phone').value.trim();
+            if (!valor) return definirErro('phone', 'Informe seu telefone.');
+            if (!campoTelefone.test(valor)) return definirErro('phone', 'Telefone inválido. Use (00) 00000-0000.');
+            return definirErro('phone', '');
+        }
+
+        function validarNotificacoes() {
+            const marcado = document.getElementById('acceptsNotifications').checked;
+            if (!marcado) return definirErro('acceptsNotifications', 'É necessário aceitar receber notificações.');
+            return definirErro('acceptsNotifications', '');
+        }
+
+        document.getElementById('name').addEventListener('blur', validarNome);
+        document.getElementById('email').addEventListener('blur', validarEmail);
+        document.getElementById('phone').addEventListener('blur', validarTelefone);
+        document.getElementById('acceptsNotifications').addEventListener('change', validarNotificacoes);
+
+        function validarFormulario() {
+            const resultados = [
+                validarNome(),
+                validarEmail(),
+                validarTelefone(),
+                validarNotificacoes()
+            ];
+            return resultados.every(Boolean);
+        }
+
+        //  envio via API REST e feedback sem recarregar a página
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            if (!validarFormulario()) {
+                return;
+            }
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const acceptsNotifications = document.getElementById('acceptsNotifications').checked;
+
+            botao.disabled = true;
+            botao.textContent = 'Enviando...';
+
+            try {
+                const resposta = await fetch('/api/interessados', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone, acceptsNotifications })
+                });
+
+                const dados = await resposta.json();
+
+                if (!resposta.ok) {
+                    definirErro('email', dados.error || 'Não foi possível concluir a pré-inscrição.');
+                    return;
+                }
+
+                form.reset();
+                modal.show();
+
+            } catch (error) {
+                definirErro('email', 'Erro de conexão. Tente novamente mais tarde.');
+            } finally {
+                botao.disabled = false;
+                botao.textContent = 'Quero entrar na lista de espera →';
+            }
+        });
+    </script>
+
+</body>
+
+</html>

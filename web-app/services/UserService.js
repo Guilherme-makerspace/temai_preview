@@ -24,11 +24,13 @@ class UserService
         const user = new User(
             data.email,
             data.password,
-            data.name
+            data.name,
+            data.phone,
+            data.acceptsNotifications
         )
 
         user.id = data.id;
-        
+
         return user;
 
     }
@@ -37,13 +39,15 @@ class UserService
     {
         const users = [];
         const data = await this.#userSchema.findAll();
-        
+
         for(const user of data)
         {
             const u = new User(
                 user.email,
                 user.password,
-                user.name
+                user.name,
+                user.phone,
+                user.acceptsNotifications
             );
 
             u.id = user.id;
@@ -54,15 +58,17 @@ class UserService
         return users;
     }
 
-    async createUser(email, password, name)
+    async createUser(email, password, name, phone, acceptsNotifications)
     {
-        const user = new User(email, password, name);
+        const user = new User(email, password, name, phone, acceptsNotifications);
 
         const u = await this.#userSchema.create(
             {
             email: user.email,
             password: user.password,
-            name: user.name
+            name: user.name,
+            phone: user.phone,
+            acceptsNotifications: user.acceptsNotifications
             }
         );
 
@@ -70,7 +76,7 @@ class UserService
 
     }
 
-    async updateUser(id, email, password, name)
+    async updateUser(id, email, password, name, phone, acceptsNotifications)
     {
         let rows = 0;
 
@@ -81,14 +87,18 @@ class UserService
             const model = new User(
                 email || user.email,
                 password || user.password,
-                name || user.name
+                name || user.name,
+                phone || user.phone,
+                acceptsNotifications ?? user.acceptsNotifications
             )
 
             const affectedRows = await this.#userSchema.update(
                 {
                     email: model.email,
                     password: model.password,
-                    name: model.name
+                    name: model.name,
+                    phone: model.phone,
+                    acceptsNotifications: model.acceptsNotifications
                 },
                 {
                     where: { id }

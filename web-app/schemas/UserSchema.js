@@ -11,11 +11,20 @@ User.init({
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     name: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    phone: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    acceptsNotifications: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 }, {
     sequelize,
