@@ -15,7 +15,7 @@ class UserController
     async getAllUsers(req, res)
     {
         const users = await this.userService.getAllUsers();
-        res.render('User/FullList', { users });
+        res.json(users);
     }
 
     userCreate(req, res)
@@ -25,13 +25,22 @@ class UserController
 
     async userPostAsync(req, res)
     {
-        const affectedRows = await this.userService.createUser(
-            req.body.email,
-            req.body.password,
-            req.body.name
-        );
+        try
+        {
+            const user = await this.userService.createUser(
+                req.body.email,
+                req.body.password,
+                req.body.name,
+                req.body.phone,
+                req.body.acceptsNotifications
+            );
 
-        res.json({ user: user });
+            res.status(201).json({ user: user });
+        }
+        catch (error)
+        {
+            res.status(400).json({ error: error.message });
+        }
     }
 
     async userDeleteAsync(req, res)
@@ -46,15 +55,22 @@ class UserController
             req.params.id,
             req.body.email,
             req.body.password,
-            req.body.name
+            req.body.name,
+            req.body.phone,
+            req.body.acceptsNotifications
         );
-    
+
         res.json({ affectedRows: affectedRows });
     }
 
     async userGetByIdView(req, res){
-        const users = await this.userService.getUserById(req.params.id);
-        res.render('User/UserView', { users: users });
+        const user = await this.userService.getUserById(req.params.id);
+
+        if (!user) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        res.json(user);
     }
 
 }

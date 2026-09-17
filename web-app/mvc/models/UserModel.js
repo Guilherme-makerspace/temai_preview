@@ -5,14 +5,17 @@ class User
     #email
     #password
     #name
-
-    constructor(email, password, name)
+    #phone
+    #acceptsNotifications
+    constructor(email, password, name, phone, acceptsNotifications)
     {
         this.#validateEmail(email);
-        
+
         this.#email = email;
         this.#password = password;
         this.#name = name;
+        this.#phone = phone;
+        this.#acceptsNotifications = acceptsNotifications;
     }
 
     get id()
@@ -35,6 +38,16 @@ class User
         return this.#name;
     }
 
+    get phone()
+    {
+        return this.#phone;
+    }
+
+    get acceptsNotifications()
+    {
+        return this.#acceptsNotifications;
+    }
+
     set email(value)
     {
         this.#email = value;
@@ -55,6 +68,17 @@ class User
 
     }
     
+    toJSON()
+    {
+        return {
+            id: this.#id,
+            email: this.#email,
+            name: this.#name,
+            phone: this.#phone,
+            acceptsNotifications: this.#acceptsNotifications
+        };
+    }
+
 }
 
 module.exports = User;
